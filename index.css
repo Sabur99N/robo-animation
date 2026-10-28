@@ -1,0 +1,124 @@
+:root {
+  --bg-primary: #F5F3EF;
+  --bg-secondary: #EDE9E3;
+  --bg-card: rgba(255, 255, 255, 0.72);
+  --text-primary: #2D2A26;
+  --text-secondary: #5C5650;
+  --text-muted: #8A8279;
+  --accent-orange: #D9A043;
+  --accent-orange-light: #E8C06A;
+  --accent-orange-dark: #B8832E;
+  --accent-metal: #A4B3C1;
+  --accent-metal-dark: #7A8E9E;
+  --border-light: rgba(164, 179, 193, 0.35);
+  --shadow-soft: 0 8px 32px rgba(45, 42, 38, 0.08);
+  --shadow-robot: 0 12px 40px rgba(217, 160, 67, 0.15);
+  --shadow-card: 0 4px 24px rgba(45, 42, 38, 0.06), 0 1px 3px rgba(45, 42, 38, 0.04);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  margin: 0;
+  overflow-x: hidden;
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.grain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.vignette {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 40;
+  background: radial-gradient(ellipse 90% 80% at 50% 50%, transparent 40%, rgba(45, 42, 38, 0.04) 100%);
+}
+
+canvas {
+  display: block;
+}
+
+/* 3D scene atmosphere overlay — sits behind UI, never blocks robot */
+.scene-atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 85%, rgba(107, 94, 80, 0.05) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(245, 243, 239, 0.25) 0%, transparent 20%, transparent 80%, rgba(237, 233, 227, 0.3) 100%);
+}
+
+/* Glass section cards — compact, corner-aligned, never block robot */
+.section-card {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.section-index {
+  color: var(--accent-orange);
+  font-weight: 600;
+}
+
+.section-title {
+  color: var(--text-primary);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.section-desc {
+  color: var(--text-secondary);
+}
+
+.rivet-dot {
+  background-color: var(--accent-metal);
+}
+
+/* Header glass */
+.header-glass {
+  background: rgba(245, 243, 239, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 1px 12px rgba(45, 42, 38, 0.04);
+}
+
+@keyframes loading {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; box-shadow: 0 0 0 0 rgba(217, 160, 67, 0.4); }
+  50% { opacity: 1; box-shadow: 0 0 12px 4px rgba(217, 160, 67, 0.25); }
+}
+
+@keyframes rivet-blink {
+  0%, 100% { background-color: var(--accent-metal); }
+  50% { background-color: var(--accent-orange); }
+}
